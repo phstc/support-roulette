@@ -1,3 +1,2 @@
 vendor/ruby
-vendor/ruby
-vendor/ruby
+config/mongo_setup.rb

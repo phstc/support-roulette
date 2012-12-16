@@ -1,9 +1,8 @@
 require "sinatra"
-require "builder"
-require "./models/power_ranger.rb"
+require "./models/agent.rb"
 
 get "/" do
-  @ranger = PowerRanger.current_ranger
+  @agent = Agent.current_agent
   builder :support_roulette_call
 end
 
