@@ -13,6 +13,10 @@ group :development do
   gem "pry-debugger"
 end
 
+group :test do
+  gem "mocha", :require => false
+end
+
 group :production do
   gem "pg"
 end

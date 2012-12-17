@@ -15,12 +15,12 @@ class Agent < ActiveRecord::Base
 
   private
   def self.next_agent agent
-    where("id != ?", agent.id).order("support_started_at ASC")
+    where("id != ?", agent.id).order("support_started_at ASC").first
   end
 
   def self.rotate_agent! agent
     new_agent = next_agent(agent)
-    new_agent.update_attribute support_started_at: Date.today
+    new_agent.update_attribute :support_started_at, Date.today
     new_agent
   end
 end
