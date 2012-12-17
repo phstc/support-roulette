@@ -9,6 +9,8 @@ gem "activerecord", "~>3.0.7"
 group :development do
   gem "shotgun"
   gem "sqlite3-ruby", require: "sqlite3"
+  gem "pry"
+  gem "pry-debugger"
 end
 
 group :production do

@@ -1,12 +1,20 @@
-# http://blog.aizatto.com/2007/05/27/activerecord-migrations-without-rails/
-# http://exposinggotchas.blogspot.com.br/2011/02/activerecord-migrations-without-rails.html
-require "yaml"
-require "logger"
-require "active_record"
-require "./config/database_setup.rb"
-require "./models/agent.rb"
+# encoding: utf-8
+
+require "rake/testtask"
+require "pry"
+require "irb"
+require "irb/completion"
+require "#{Dir.pwd}/config/boot"
+
+task default: :test
+
+Rake::TestTask.new do |t|
+  t.pattern = "spec/**/*_spec.rb"
+end
 
 namespace :db do
+  # http://blog.aizatto.com/2007/05/27/activerecord-migrations-without-rails/
+  # http://exposinggotchas.blogspot.com.br/2011/02/activerecord-migrations-without-rails.html
   desc "Migrate the database (options: VERSION=x, VERBOSE=false)."
   task :migrate do
     ActiveRecord::Migration.verbose = true
@@ -29,3 +37,7 @@ namespace :agents do
   end
 end
 
+task :console do
+  ARGV.clear
+  IRB.start
+end

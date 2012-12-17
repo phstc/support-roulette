@@ -1,8 +1,6 @@
 # encoding: utf-8
 
-require "active_record"
-require "date"
-require "./config/database_setup.rb"
+require "#{Dir.pwd}/config/boot"
 
 class Agent < ActiveRecord::Base
   def self.current_agent

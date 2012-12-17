@@ -1,5 +1,7 @@
+# encoding: utf-8
+
 require "sinatra"
-require "./models/agent.rb"
+require "#{Dir.pwd}/config/boot.rb"
 
 get "/" do
   @agent = Agent.current_agent

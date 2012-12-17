@@ -13,10 +13,27 @@ GEM
     activesupport (3.0.17)
     arel (2.0.10)
     builder (2.1.2)
+    coderay (1.0.8)
+    columnize (0.3.6)
     daemons (1.1.9)
+    debugger (1.1.4)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.3)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.5)
     eventmachine (1.0.0)
     i18n (0.5.0)
+    method_source (0.8.1)
     pg (0.14.1)
+    pry (0.9.10)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    pry-debugger (0.2.0)
+      debugger (~> 1.1.3)
+      pry (~> 0.9.9)
     rack (1.4.1)
     rack-protection (1.3.2)
       rack
@@ -27,6 +44,7 @@ GEM
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
       tilt (~> 1.3, >= 1.3.3)
+    slop (3.3.3)
     sqlite3 (1.3.6)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -44,6 +62,8 @@ DEPENDENCIES
   activerecord (~> 3.0.7)
   builder (~> 2.1.2)
   pg
+  pry
+  pry-debugger
   rake
   shotgun
   sinatra
