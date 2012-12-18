@@ -2,25 +2,24 @@
 
 require "#{Dir.pwd}/config/boot"
 
-class Agent < ActiveRecord::Base
+class Agent
+  attr_accessor :name, :phone
+
+  def initialize attributes
+    @name  = attributes["name"]
+    @phone = attributes["phone"]
+  end
+
   def self.current_agent
-    agent = order("support_started_at DESC").first
-    agent = rotate_agent!(agent) unless agent.on_duty?
-    agent
+    all[(Date.today.cweek % all.size) - 1]
   end
 
-  def on_duty?
-    (support_started_at - Date.today).to_i <= 7
+  def self.all
+    @all ||= CONFIG["agents"].map { | agent_hash | Agent.new agent_hash }
   end
 
-  private
-  def self.next_agent agent
-    where("id != ?", agent.id).order("support_started_at ASC").first
-  end
-
-  def self.rotate_agent! agent
-    new_agent = next_agent(agent)
-    new_agent.update_attribute :support_started_at, Date.today
-    new_agent
+  def == object
+    @name == object.name && @phone == object.phone
   end
 end
+

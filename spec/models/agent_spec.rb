@@ -3,52 +3,49 @@
 require "#{Dir.pwd}/spec/spec_helper"
 
 describe Agent do
-
-  describe "#on_duty?" do
-    it "should be on duty" do
-      agent = Agent.new support_started_at: Date.today
-      assert agent.on_duty?
-    end
-
-    it "should not be on duty" do
-      agent = Agent.new support_started_at: Date.today + 8.days
-      refute agent.on_duty?
-    end
+  before do
+    # TODO create a fixture
+    @lord_vader_hash = {"name" => "Lord Vader",
+      "phone" => "+5511999999999"}
+    @lord_vader = Agent.new @lord_vader_hash
+    @homer_simpson_hash = {"name" => "Homer Simpson",
+      "phone" => "+5511999999999"}
+    @homer_simpson = Agent.new @homer_simpson_hash
+    CONFIG.stubs(:[]).with("agents").
+      returns([@lord_vader_hash, @homer_simpson_hash])
   end
 
   describe "#self.current_agent" do
-    it "should return the current agent" do
-      current_agent = Agent.new name: "Pablo Cantero",
-        phone: "+5511999999999"
-      Agent.stubs(:order).returns([current_agent])
-      assert_same current_agent, Agent.current_agent
+    it "returns the current_agent" do
+      Date.stubs today: stub(cweek: 1)
+      assert_equal @lord_vader, Agent.current_agent
     end
 
-    describe "agent rotation" do
-      before do
-        @current_agent = Agent.new name: "Pablo Cantero",
-          phone: "+5511999999999",
-          support_started_at: Date.today + 8
-        @next_agent = Agent.new name: "Pablo Cantero",
-          phone: "+5511888888888",
-          support_started_at: Date.today - 8
+    it "rotate agents week" do
+      Date.stubs today: stub(cweek: 2)
+      assert_equal @homer_simpson, Agent.current_agent
+    end
+  end
 
-        Agent.stubs(:order).returns([@current_agent])
+  describe "#self.all" do
+    it "returns all agents" do
+      assert_equal @lord_vader    , Agent.all[0]
+      assert_equal @homer_simpson , Agent.all[1]
+      assert Agent.all.size == 2
+    end
+  end
 
-        next_agent_query = stub(order: [@next_agent])
-        Agent.stubs(:where).with("id != ?", nil).returns(next_agent_query)
+  describe "#==" do
+    it "should be equal" do
+      assert_equal Agent.new(name: "Zorro", phone: "+5511999999999"), Agent.new(name: "Zorro", phone: "+5511999999999")
+    end
 
-        Agent.any_instance.stubs(:update_attribute)
-      end
+    it "should refute different name" do
+      assert_equal Agent.new(name: "Zorro", phone: "+5511999999999"), Agent.new(name: "Sancho Panza", phone: "+5511999999999")
+    end
 
-      it "rotates and return current agent" do
-        assert_same @next_agent, Agent.current_agent
-      end
-
-      it "updates next agent start date" do
-        @next_agent.expects(:update_attribute).with(:support_started_at, Date.today)
-        Agent.current_agent
-      end
+    it "should refute different phone" do
+      assert_equal Agent.new(name: "Zorro", phone: "+5511999999999"), Agent.new(name: "Zorro", phone: "+5511888888888")
     end
   end
 end
