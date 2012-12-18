@@ -21,7 +21,7 @@ describe Agent do
       assert_equal @lord_vader, Agent.current_agent
     end
 
-    it "rotate agents week" do
+    it "rotate agents weekly" do
       Date.stubs today: stub(cweek: 2)
       assert_equal @homer_simpson, Agent.current_agent
     end
