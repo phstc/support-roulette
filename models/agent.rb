@@ -17,9 +17,5 @@ class Agent
   def self.all
     @all ||= CONFIG["agents"].map { | agent_hash | Agent.new agent_hash }
   end
-
-  def == object
-    @name == object.name && @phone == object.phone
-  end
 end
 
