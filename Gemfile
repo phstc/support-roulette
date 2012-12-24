@@ -6,11 +6,11 @@ gem "builder", "~> 2.1.2"
 gem "rake"
 gem "twilio-ruby"
 
-group :development do
+# group :development do
   gem "pry"
   gem "pry-debugger"
-end
-gem "shotgun"
+  gem "shotgun"
+# end
 
 group :production do
   gem "thin"
