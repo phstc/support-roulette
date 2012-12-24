@@ -1,36 +1,39 @@
 # encoding: utf-8
 
-require "#{Dir.pwd}/spec/spec_helper"
+require "./spec/spec_helper"
 
 describe Agent do
   before do
-    # TODO create a fixture
-    lord_vader_hash = {"name" => "Lord Vader",
-      "phone" => "+5511999999999"}
-    @lord_vader = Agent.new lord_vader_hash
-    homer_simpson_hash = {"name" => "Homer Simpson",
-      "phone" => "+5511999999999"}
-    @homer_simpson = Agent.new homer_simpson_hash
-    CONFIG.stubs(:[]).with("agents").
-      returns [lord_vader_hash, homer_simpson_hash]
+    CONFIG = YAML::load(ERB.new(File.read("./spec/fixtures/application.yml")).result)
   end
 
-  describe "#self.current_agent" do
-    it "returns the current_agent" do
+  describe "#notify" do
+    it "should notify current agent" do
       Date.stubs today: stub(cweek: 1)
-      assert_equal @lord_vader.name, Agent.current_agent.name
+      TwilioClient.expects(:send_message).
+        with("+5511111111111",
+             "+5511444444444",
+             "Congratulations you are the current support agent!")
+      Agent.current.notify
+    end
+  end
+
+  describe "#self.current" do
+    it "returns the current agent" do
+      Date.stubs today: stub(cweek: 1)
+      assert_equal "Batman", Agent.current.name
     end
 
     it "rotate agents weekly" do
       Date.stubs today: stub(cweek: 2)
-      assert_equal @homer_simpson.name, Agent.current_agent.name
+      assert_equal "Homer", Agent.current.name
     end
   end
 
   describe "#self.all" do
     it "returns all agents" do
-      assert_equal @lord_vader.name    , Agent.all[0].name
-      assert_equal @homer_simpson.name , Agent.all[1].name
+      assert_equal "Batman" , Agent.all[0].name
+      assert_equal "Homer"  , Agent.all[1].name
       assert Agent.all.size == 2
     end
   end

@@ -1,7 +1,6 @@
 # encoding: utf-8
 
-require "#{Dir.pwd}/config/boot"
-require "twilio-ruby"
+require "./config/boot"
 
 class Agent
   attr_accessor :name, :phone
@@ -11,7 +10,7 @@ class Agent
     @phone = attributes["phone"]
   end
 
-  def self.current_agent
+  def self.current
     all[(Date.today.cweek % all.size) - 1]
   end
 
@@ -20,14 +19,9 @@ class Agent
   end
 
   def notify
-    message = client.account.sms.messages.create to: @phone,
-      from: CONFIG["twilio"]["from_sms"],
-      body: "Congratulations you are the current support agent!"
-  end
-
-  private
-  def client
-    @client ||= Twilio::REST::Client.new CONFIG["twilio"]["account_sid"], CONFIG["twilio"]["auth_token"]
+    TwilioClient.send_message @phone,
+      CONFIG["twilio"]["from_sms"],
+      "Congratulations you are the current support agent!"
   end
 end
 
