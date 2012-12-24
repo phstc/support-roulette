@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "./config/boot.rb"
+
+# Date.today.cweek changes on sundays see Agent.current_agent
+if Date.today.sunday?
+  puts "Notifying current agent #{Agent.current.name}"
+  Agent.current.notify
+  puts "done."
+end
+
