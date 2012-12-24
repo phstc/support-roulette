@@ -4,11 +4,16 @@ gem "sinatra"
 gem "thin"
 gem "builder", "~> 2.1.2"
 gem "rake"
+gem "twilio-ruby"
 
 group :development do
-  gem "shotgun"
   gem "pry"
   gem "pry-debugger"
+end
+gem "shotgun"
+
+group :production do
+  gem "thin"
 end
 
 group :test do

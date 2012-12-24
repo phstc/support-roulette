@@ -1,0 +1,9 @@
+agents:
+  - {name: "Batman", phone: "+55998888888"}
+  - {name: "Homer", phone: "+55998888888"}
+twilio:
+  account_sid: ""
+  auth_token: ""
+  from_call: ""
+  from_sms: ""
+

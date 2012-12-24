@@ -1,3 +1,4 @@
 .DS_Store
 vendor/ruby
-config/mongo_setup.rb
+.env
+

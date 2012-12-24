@@ -1,2 +1,8 @@
 agents:
-  - {name: Pablo Cantero, phone: +5511965056615}
+  - {name: "<%= ENV["AGENT1"] %>", phone: "<%= ENV["AGENT1_PHONE"] %>"}
+twilio:
+  account_sid: "<%= ENV["TWILIO_ACCOUNT_SID"] %>"
+  auth_token: "<%= ENV["TWILIO_AUTH_TOKEN"] %>"
+  from_call: "<%= ENV["TWILIO_FROM_CALL"] %>"
+  from_sms: "<%= ENV["TWILIO_FROM_SMS"] %>"
+

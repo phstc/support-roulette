@@ -1,0 +1,9 @@
+#!/bin/sh
+# https://github.com/ddollar/foreman/issues/12#issuecomment-2656011
+
+if [ "$RACK_ENV" == "production" ]; then
+  bundle exec thin start -o 0.0.0.0 -p $PORT
+else
+  bundle exec shotgun config.ru start -o 0.0.0.0 -p $PORT
+fi
+
