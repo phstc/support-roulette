@@ -21,7 +21,7 @@ class Agent
   def notify
     TwilioClient.send_message @phone,
       CONFIG["twilio"]["from_sms"],
-      "Congratulations you are the current support agent!"
+      "Congratulations, you are the current support agent!"
   end
 end
 
