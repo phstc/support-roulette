@@ -1,10 +1,10 @@
 agents:
   - {name: "Batman", phone: "+5511111111111"}
-  - {name: "Homer", phone: "+5511222222222"}
+  - {name: "Homer", phone: "+5511111111111"}
 twilio:
-  account_sid: ""
-  auth_token: ""
-  from_call: "+5511333333333"
-  from_sms: "+5511444444444"
+  account_sid: "abc123"
+  auth_token: "abc123"
+  from_call: "+5511111111111"
+  from_sms: "+5511111111111"
 
 

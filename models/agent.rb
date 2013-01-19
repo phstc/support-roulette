@@ -15,6 +15,7 @@ class Agent
   end
 
   def self.all
+    raise Exception, "No agents found" if CONFIG["agents"].nil? || CONFIG["agents"].empty?
     @all ||= CONFIG["agents"].map {|agent_hash| Agent.new agent_hash}
   end
 

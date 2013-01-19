@@ -10,17 +10,17 @@ Everybody has already a cellphone, carrying another isn't a good idea. That's th
 
 Basically, create a [Twilio](http://www.twilio.com) account, get a phone number, configure the `application.yml`, that's it.
 
-**config/application.yml**
+**config/application.yml.sample**
 
 ```yaml
 agents:
   - {name: "Batman", phone: "+5511111111111"}
-  - {name: "Homer", phone: "+5511222222222"}
+  - {name: "Homer", phone: "+5511111111111"}
 twilio:
-  account_sid: ""
-  auth_token: ""
-  from_call: "+5511333333333"
-  from_sms: "+5511444444444"
+  account_sid: "abc123"
+  auth_token: "abc123"
+  from_call: "+5511111111111"
+  from_sms: "+5511111111111"
 ```
 
 You can add as many support agents as you want. They will rotate weekly.
@@ -42,9 +42,9 @@ You can notify the current support agent by calling:
 $ bundle exec rake scheduler:notify_current_agent
 ```
 
-You can configure [Heroku Scheduler](https://addons.heroku.com/scheduler) (for free) to notify the current support agent automatically.
+Looking for something more automated? You can configure [Heroku Scheduler](https://addons.heroku.com/scheduler) (for free) to notify the current support agent automatically.
 
-The current support agent will by notified by SMS
+The current support agent will by notified by SMS.
 
 `Congratulations you are the current support agent!`
 
@@ -54,5 +54,19 @@ Congratulations??? :trollface:
 
 There is an explicit `if Date.today.sunday?` on `scheduler:notify_current_agent`, it exists to guarantee that the current support agent will be notified only when it was rotated (on sundays).
 
+## To start
+
+```shell
+foreman start
+open http://localhost:5000
+```
+
+The available urls: `/voice_request` and `/notify_current_agent`.
+
+## To run the test suite
+
+```shell
+rake spec
+```
 
 
