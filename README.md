@@ -2,7 +2,7 @@
 
 Do you need a support phone number in your company? What do you think about a phone number that rotates between your team members?
 
-In the company that I work for, we decided to have a support developer per week, a guy who will carry a support cellphone at night, weekend etc. If there is an emergency in our website this cellphone will ring.
+A long time ago, in a galaxy far, far away, we decided to have a support developer per week, a guy who will carry a support cellphone at night, weekend etc in case of any emergency in the company's website.
 
 Everybody has already a cellphone, carrying another isn't a good idea. That's the motivation of Support Roulette.
 
