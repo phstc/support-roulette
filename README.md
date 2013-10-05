@@ -8,7 +8,7 @@ Everybody has already a cellphone, carrying another isn't a good idea. That's th
 
 ## How it works
 
-Basically, create a [Twilio](http://www.twilio.com) account, get a phone number, configure the `application.yml`, that's it.
+Basically, create a [Twilio](http://www.twilio.com) account, get a phone number, configure the `application.yml` and nothing more, that's it. :smile:
 
 **config/application.yml.sample**
 
