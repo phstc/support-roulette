@@ -52,7 +52,7 @@ Congratulations??? :trollface:
 
 #### Note
 
-There is an explicit `if Date.today.sunday?` on `scheduler:notify_current_agent`, it exists to guarantee that the current support agent will be notified only when it was rotated (on sundays).
+There is an explicit `if Date.today.sunday?` on `scheduler:notify_current_agent`, it exists to guarantee that the current support agent will be notified only when it was rotated (on Sundays).
 
 ## To start
 
